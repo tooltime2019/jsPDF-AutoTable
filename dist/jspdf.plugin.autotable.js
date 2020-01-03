@@ -194,6 +194,13 @@ exports.setDefaults = setDefaults;
 
 "use strict";
 
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var config_1 = __webpack_require__(2);
 var state_1 = __webpack_require__(0);
@@ -338,7 +345,7 @@ function marginOrPadding(value, defaultValue) {
 exports.marginOrPadding = marginOrPadding;
 function styles(styles) {
     styles = Array.isArray(styles) ? styles : [styles];
-    return polyfills_1.assign.apply(void 0, [config_1.defaultStyles()].concat(styles));
+    return polyfills_1.assign.apply(void 0, __spreadArrays([config_1.defaultStyles()], styles));
 }
 exports.styles = styles;
 
@@ -1442,6 +1449,13 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var models_1 = __webpack_require__(4);
 var config_1 = __webpack_require__(2);
@@ -1472,7 +1486,7 @@ function parseInput(args) {
     };
     var _loop_1 = function (styleProp) {
         var styles = allOptions.map(function (opts) { return opts[styleProp] || {}; });
-        table.styles[styleProp] = polyfills_1.assign.apply(void 0, [{}].concat(styles));
+        table.styles[styleProp] = polyfills_1.assign.apply(void 0, __spreadArrays([{}], styles));
     };
     // Merge styles one level deeper
     for (var _i = 0, _a = Object.keys(table.styles); _i < _a.length; _i++) {
@@ -1489,7 +1503,7 @@ function parseInput(args) {
             }
         }
     }
-    table.settings = polyfills_1.assign.apply(void 0, [{}, config_1.defaultConfig()].concat(allOptions));
+    table.settings = polyfills_1.assign.apply(void 0, __spreadArrays([{}, config_1.defaultConfig()], allOptions));
     table.settings.margin = common_1.marginOrPadding(table.settings.margin, config_1.defaultConfig().margin);
     if (table.settings.theme === 'auto') {
         table.settings.theme = table.settings.useCss ? 'plain' : 'striped';
@@ -1634,7 +1648,7 @@ function getTableColumns(settings) {
         });
     }
     else {
-        var merged = __assign({}, settings.head[0], settings.body[0], settings.foot[0]);
+        var merged = __assign(__assign(__assign({}, settings.head[0]), settings.body[0]), settings.foot[0]);
         delete merged._element;
         var dataKeys = Object.keys(merged);
         return dataKeys.map(function (key) { return new models_1.Column(key, key, key); });
@@ -1646,7 +1660,7 @@ function cellStyles(sectionName, dataKey, rowIndex) {
     var otherStyles = [theme.table, theme[sectionName], table.styles.styles, table.styles[sectionName + "Styles"]];
     var colStyles = sectionName === 'body' ? table.styles.columnStyles[dataKey] || {} : {};
     var rowStyles = sectionName === 'body' && rowIndex % 2 === 0 ? polyfills_1.assign({}, theme.alternateRow, table.styles.alternateRowStyles) : {};
-    return polyfills_1.assign.apply(void 0, [config_1.defaultStyles()].concat(otherStyles.concat([rowStyles, colStyles])));
+    return polyfills_1.assign.apply(void 0, __spreadArrays([config_1.defaultStyles()], __spreadArrays(otherStyles, [rowStyles, colStyles])));
 }
 
 
